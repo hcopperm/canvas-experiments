@@ -1,0 +1,34 @@
+<html>
+ <head>
+ <script type="application/javascript">
+         function drawShape() {
+                 
+                 var x = 0;
+                 while (x < 550) {
+                    timeoutLoop(x);
+                    x = x + 19;
+                 }
+                 
+      
+         }
+
+         function timeoutLoop() {
+                 var start = arguments[0];
+                 setTimeout(function() {
+                                 var ctx = document.getElementById('tutorial').getContext('2d');
+                                 var degrees = 360;
+                                 var radians = (Math.PI/180)*degrees
+                                // ctx.strokeRect(start, 10, 15, 15);
+                 ctx.arc(start,start,start,0,radians,true);
+                 ctx.stroke();
+                                 }, (1000 + start)/2);
+         }
+         
+         
+         </script>
+ </head>
+ <body onload="drawShape();">
+   <canvas id="tutorial" width="555" height="550"></canvas>
+ </body>
+</html>
+
