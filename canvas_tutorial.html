@@ -3,15 +3,15 @@
     <script type="application/javascript">
       function drawArcs(startPoint) {
         while (startPoint < 500) {
-          drawArc(startPoint, "red", 1);
+          drawArc(startPoint, "rgb(" + startPoint + ", 0, 0)", 1);
           startPoint += 19;
         }
         return startPoint - 19;
       }
 
       function eraseArcs(startPoint) {
-        while (startPoint >= 0) {
-          drawArc(startPoint, "black", -1);
+        while (startPoint > 0) {
+          drawArc(startPoint, "rgb(0, " + Math.floor(255-42.5*(startPoint % 6)) + ", " + Math.floor(255-42.5*startPoint % 9) + ")", -1);
           startPoint -= 19;
         }
       }
@@ -26,7 +26,7 @@
           var ctx = document.getElementById('tutorial').getContext('2d');
           var degrees = 360;
           var radians = (Math.PI/180)*degrees
-          var radius = start/2;
+          var radius = start;
           ctx.beginPath();
           ctx.arc(start, start, radius, 0, radians, true);
           ctx.closePath();
