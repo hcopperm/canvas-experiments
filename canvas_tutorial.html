@@ -1,50 +1,49 @@
 <html>
- <head>
- <script type="application/javascript">
-         function drawArcs() {
-                 var x = arguments[0];
-                 while (x < 500) {
-                    drawArc(x, "orange", 1);
-                    x = x + 19;
-                 }
-         }
-         function eraseArcs() {
-                 var x = arguments[0];
-                 while (x > 0) {
-                    drawArc(x, "black", -1);
-                    x = x - 19;
-                 }
+  <head>
+    <script type="application/javascript">
+      function drawArcs() {
+        var x = arguments[0];
+        while (x < 500) {
+          drawArc(x, "orange", 1);
+          x = x + 19;
+        }
+      }
 
-         }
-function drawAndEraseArcs() {
-      drawArcs(0);
-      setTimeout(function () {eraseArcs(900)}, 1200);
-}
+      function eraseArcs() {
+        var x = arguments[0];
+        while (x > 0) {
+          drawArc(x, "black", -1);
+          x = x - 19;
+        }
+      }
 
+      function drawAndEraseArcs() {
+        drawArcs(0);
+        setTimeout(function () {eraseArcs(900)}, 1200);
+      }
 
-
-         function drawArc() {
-                 var start = arguments[0];
-                 var color = arguments[1];
-                 setTimeout(function() {
-                                 var ctx = document.getElementById('tutorial').getContext('2d');
-                                 var degrees = 360;
-                                 var radians = (Math.PI/180)*degrees
-                                 ctx.arc(start,start,start,0,radians,true);
-                                 ctx.strokeStyle = color;
-                                 ctx.stroke();
-                 }, (500 + (start*arguments[2])));
-         }
+      function drawArc() {
+        var start = arguments[0];
+        var color = arguments[1];
+        setTimeout(function() {
+          var ctx = document.getElementById('tutorial').getContext('2d');
+          var degrees = 360;
+          var radians = (Math.PI/180)*degrees
+          ctx.arc(start,start,start,0,radians,true);
+          ctx.strokeStyle = color;
+          ctx.stroke();
+        }, (500 + (start*arguments[2])));
+      }
  
-function goBackAndForth() {
-      setTimeout(drawAndEraseArcs, 1000);
-}
-                  
+      function goBackAndForth() {
+        setTimeout(drawAndEraseArcs, 1000);
+      }
          
-         </script>
- </head>
- <body onload="goBackAndForth();">
-   <canvas id="tutorial" width="555" height="550"></canvas>
- </body>
+    </script>
+  </head>
+  
+  <body onload="goBackAndForth();">
+    <canvas id="tutorial" width="555" height="550"></canvas>
+  </body>
 </html>
 
