@@ -1,50 +1,56 @@
 <html>
   <head>
     <script type="application/javascript">
-      function drawArcs(startPoint) {
-        while (startPoint < 500) {
-          drawArc(startPoint, "rgb(" + startPoint + ", 0, 0)", 1);
-          startPoint += 19;
-        }
-        return startPoint - 19;
-      }
-
-      function eraseArcs(startPoint) {
-        while (startPoint > 0) {
-          drawArc(startPoint, "rgb(0, " + Math.floor(255-42.5*(startPoint % 6)) + ", " + Math.floor(255-42.5*startPoint % 9) + ")", -1);
-          startPoint -= 19;
+     function stepColor(startPoint) {
+        return Math.floor(255-42.5*(startPoint % 3));
+      } 
+      
+      function drawArcs() {
+        for (var x = 0; x < 50; x++) {
+          var startPoint = x*20;
+          makeArc(startPoint, "rgb(" + stepColor(startPoint) + ", 0, " + stepColor(startPoint) + ")", 1);
         }
       }
 
-      function drawAndEraseArcs() {
-        var endPoint = drawArcs(0);
-        setTimeout(function () {eraseArcs(endPoint)}, 1200);
+      
+
+      function eraseArcs() {
+        for (var x = 50; x > 0; x--) {
+          var startPoint = x*20;
+          makeArc(startPoint, "rgb(0, " + stepColor(startPoint) + ", " + stepColor(startPoint) + ")", -1);
+        }
       }
 
-      function drawArc(start, color, delay) {
+      function makeArc(start, color, delay) {
         setTimeout(function() {
           var ctx = document.getElementById('tutorial').getContext('2d');
           var degrees = 360;
           var radians = (Math.PI/180)*degrees
-          var radius = start;
           ctx.beginPath();
-          ctx.arc(start, start, radius, 0, radians, true);
+          if (start <500) {
+            ctx.arc(start, 250, start/2, 0, radians, true);
+          } else {
+            ctx.arc(start, 250, (1000-start)/2, 0, radians, true);
+          }
           ctx.closePath();
           ctx.lineWidth = 5;
           ctx.strokeStyle = color;
           ctx.stroke();
-        }, (500 + (start*delay)));
+        }, (1000 + (start*delay)));
       }
- 
-      function goBackAndForth() {
-        setInterval(drawAndEraseArcs, 2000);
+
+      function drawAndEraseArcs() {
+        setInterval(function() {
+          drawArcs();
+          setTimeout(function () {eraseArcs()}, 2400);
+        }, 3000);
       }
-         
+
     </script>
   </head>
   
-  <body onload="goBackAndForth();">
-    <canvas id="tutorial" width="555" height="550"></canvas>
+  <body onload="drawAndEraseArcs();">
+    <canvas id="tutorial" width="1000" height="510"></canvas>
   </body>
 </html>
 
