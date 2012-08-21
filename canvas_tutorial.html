@@ -1,56 +1,22 @@
 <html>
   <head>
-    <script type="application/javascript">
-     function stepColor(startPoint) {
-        return Math.floor(255-42.5*(startPoint % 3));
-      } 
-      
-      function drawArcs() {
-        for (var x = 0; x < 50; x++) {
-          var startPoint = x*20;
-          makeArc(startPoint, "rgb(" + stepColor(startPoint) + ", 0, " + stepColor(startPoint) + ")", 1);
-        }
-      }
-
-      
-
-      function eraseArcs() {
-        for (var x = 50; x > 0; x--) {
-          var startPoint = x*20;
-          makeArc(startPoint, "rgb(0, " + stepColor(startPoint) + ", " + stepColor(startPoint) + ")", -1);
-        }
-      }
-
-      function makeArc(start, color, delay) {
-        setTimeout(function() {
-          var ctx = document.getElementById('tutorial').getContext('2d');
-          var degrees = 360;
-          var radians = (Math.PI/180)*degrees
-          ctx.beginPath();
-          if (start <500) {
-            ctx.arc(start, 250, start/2, 0, radians, true);
-          } else {
-            ctx.arc(start, 250, (1000-start)/2, 0, radians, true);
-          }
-          ctx.closePath();
-          ctx.lineWidth = 5;
-          ctx.strokeStyle = color;
-          ctx.stroke();
-        }, (1000 + (start*delay)));
-      }
-
-      function drawAndEraseArcs() {
-        setInterval(function() {
-          drawArcs();
-          setTimeout(function () {eraseArcs()}, 2400);
-        }, 3000);
-      }
-
-    </script>
+    <script src="loopy.js"></script>
   </head>
   
-  <body onload="drawAndEraseArcs();">
-    <canvas id="tutorial" width="1000" height="510"></canvas>
+  <body>
+    <canvas id="tutorial" width="1000" height="550"></canvas>
+
+    <script>
+      var tutorial = document.getElementById("tutorial");
+      tutorial.addEventListener("click", function(clickEvent) {
+        var arc = new arcBusiness(clickEvent); 
+        arc.drawAndEraseArcs();
+
+      });
+
+
+
+    </script>
   </body>
 </html>
 
