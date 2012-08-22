@@ -4,18 +4,22 @@
   </head>
   
   <body>
+    <div>
+      <button id = "clear">Clear</button>
+    </div>
     <canvas id="tutorial" width="1000" height="550"></canvas>
 
     <script>
       var tutorial = document.getElementById("tutorial");
       tutorial.addEventListener("click", function(clickEvent) {
         var arc = new arcBusiness(clickEvent); 
-        arc.drawAndEraseArcs();
+        arc.drawArcs();
 
       });
-
-
-
+      var clearButton = document.getElementById("clear");
+      clearButton.addEventListener("click", function(clickEvent) {
+        tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
+      });
     </script>
   </body>
 </html>
