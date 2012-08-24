@@ -7,19 +7,34 @@
     <div>
       <button id = "clear">Clear</button>
     </div>
+    <div>
+      <button id = "circles">Circles</button>
+      <button id = "squares">Squares</button>
+    </div>
     <canvas id="tutorial" width="1000" height="550"></canvas>
 
     <script>
+      var circles = true;
       var tutorial = document.getElementById("tutorial");
       tutorial.addEventListener("click", function(clickEvent) {
-        var arc = new arcBusiness(clickEvent); 
-        arc.drawArcs();
-
+        if (circles) {
+          var arc = new ArcBusiness(clickEvent); 
+          arc.drawArcs();
+        } else {
+          var square = new SquareBusiness(clickEvent);
+          square.drawSquare();
+        }
       });
       var clearButton = document.getElementById("clear");
       clearButton.addEventListener("click", function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
       });
+      var circleButton = document.getElementById("circles");
+      circleButton.addEventListener("click", function() {circles = true});
+      var squareButton = document.getElementById("squares");
+      squareButton.addEventListener("click", function() {circles = false});
+      
+
     </script>
   </body>
 </html>
