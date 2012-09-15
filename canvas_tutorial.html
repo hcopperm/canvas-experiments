@@ -9,7 +9,7 @@
     </div>
     <div>
       <button id = "circles">Circles</button>
-      <button id = "squares">Squares</button>
+      <button id = "hearts">Hearts</button>
     </div>
     <canvas id="tutorial" width="1000" height="550"></canvas>
 
@@ -18,11 +18,11 @@
       var tutorial = document.getElementById("tutorial");
       tutorial.addEventListener("click", function(clickEvent) {
         if (circles) {
-          var arc = new ArcBusiness(clickEvent); 
+          var arc = new ArcBusiness(clickEvent);
           arc.drawArcs();
         } else {
-          var square = new SquareBusiness(clickEvent);
-          square.drawSquare();
+          var heart = new HeartBusiness(clickEvent);
+          heart.drawHeart();
         }
       });
       var clearButton = document.getElementById("clear");
@@ -31,8 +31,8 @@
       });
       var circleButton = document.getElementById("circles");
       circleButton.addEventListener("click", function() {circles = true});
-      var squareButton = document.getElementById("squares");
-      squareButton.addEventListener("click", function() {circles = false});
+      var heartButton = document.getElementById("hearts");
+      heartButton.addEventListener("click", function() {circles = false});
       
 
     </script>

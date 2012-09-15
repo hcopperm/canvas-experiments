@@ -3,7 +3,6 @@ function DrawBasics(clickEvent) {
   this.canvas = document.getElementById("tutorial");
   this.ctx = this.canvas.getContext('2d'); 
 
-
   this.stepColor = function(startPoint) {
     return Math.floor(255-42.5*(startPoint % 3));
   }
@@ -33,6 +32,25 @@ function DrawBasics(clickEvent) {
   this.color = "rgb(" + this.stepColor(this.mouseCoords.y) + ", " + this.stepColor(this.mouseCoords.x) +", " + this.stepColor(Math.random() * 90) + ")";  
 }
 
+
+function HeartBusiness(clickEvent) {
+  this.drawing = new DrawBasics(clickEvent);
+  this.x = this.drawing.mouseCoords.x;
+  this.y = this.drawing.mouseCoords.y;
+  this.drawHeart = function() {
+    var ctx = this.drawing.ctx;
+    ctx.beginPath();
+    ctx.moveTo(this.x, this.y);
+    ctx.bezierCurveTo(this.x, this.y - 3, this.x - 5, this.y - 15, this.x - 25, this.y - 15);
+    ctx.bezierCurveTo(this.x - 55, this.y - 15, this.x - 55, this.y + 22.5, this.x - 55, this.y + 22.5);
+    ctx.bezierCurveTo(this.x - 55, this.y + 40, this.x - 35, this.y + 62, this.x, this.y + 80);
+    ctx.bezierCurveTo(this.x + 35, this.y + 62, this.x + 55, this.y + 40, this.x + 55, this.y + 22.5);
+    ctx.bezierCurveTo(this.x + 55, this.y + 22.5, this.x + 55, this.y - 15, this.x + 25, this.y - 15);
+    ctx.bezierCurveTo(this.x + 10, this.y - 15, this.x, this.y - 3, this.x, this.y);
+    ctx.fillStyle = "pink";
+    ctx.fill();
+  }
+}
 
 
 function SquareBusiness(clickEvent) {
