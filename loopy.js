@@ -47,6 +47,8 @@ function DrawBasics(clickEvent) {
 
 
 function Heart(clickEvent) {
+
+
   this.drawing = new DrawBasics(clickEvent);
   this.x = this.drawing.mouseCoords.x;
   this.y = this.drawing.mouseCoords.y;
@@ -179,6 +181,13 @@ function ArcBusiness(clickEvent) {
   }
 */
 
+function ArcBusiness(clickEvent) {
+  this.drawing = new DrawBasics(clickEvent);
+  this.degrees = 360;
+  this.radians = (Math.PI/180)*this.degrees;
+
+
+
   this.drawArcs = function() {
     for (var x = 2; x < 50; x++) {
       this.delayArc(x*20, 1);
@@ -199,6 +208,19 @@ function ArcBusiness(clickEvent) {
     }, (start*delay));
   }
 
+    arc.makeArc(20);
+    setTimeout(function() {
+     arc.makeArc(start); 
+    }, (start*delay));
+  }
 
+  this.makeArc = function(start) {
+    this.drawing.ctx.beginPath();
+    this.drawing.ctx.arc(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, start/2, 0, this.radians, true);
+    this.drawing.ctx.closePath();
+    this.drawing.ctx.lineWidth = 5;
+    this.drawing.ctx.strokeStyle = this.drawing.color;
+    this.drawing.ctx.stroke();
+  }
 }
      
