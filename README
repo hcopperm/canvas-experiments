@@ -1,5 +1,3 @@
 README
 Playing around with the <canvas> html tag.
-Making shapes go ooOOOOOoo
-Quickest way to see it: copy and paste the html into a text editor, and open it in a browser that supports <canvas>
-
+See it working at http://hcopperm.github.com/canvas-experiments/canvas_tutorial.html
