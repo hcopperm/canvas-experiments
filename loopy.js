@@ -43,25 +43,42 @@ function DrawBasics(clickEvent) {
     /*this.ctx.fillStyle = this.color;
     this.ctx.fill();*/
   }
+
+
 }
+
+function ImageStamp(clickEvent) {
+  this.drawing = new DrawBasics(clickEvent);
+  this.draw = function() {
+    var img = new Image();
+    var ctx = this.drawing.ctx;
+    var x = this.drawing.mouseCoords.x;
+    var y = this.drawing.mouseCoords.y;
+    img.onload = function(){
+      ctx.drawImage(img,x,y);
+    };
+    img.src = './skull.png';
+  }  
+}
+
 
 
 function Heart(clickEvent) {
 
 
   this.drawing = new DrawBasics(clickEvent);
-  this.x = this.drawing.mouseCoords.x;
-  this.y = this.drawing.mouseCoords.y;
   this.drawHeart = function() {
     var ctx = this.drawing.ctx;
+    var x = this.drawing.mouseCoords.x;
+    var y = this.drawing.mouseCoords.y;
     ctx.beginPath();
-    ctx.moveTo(this.x, this.y);
-    ctx.bezierCurveTo(this.x, this.y - 3, this.x - 5, this.y - 15, this.x - 25, this.y - 15);
-    ctx.bezierCurveTo(this.x - 55, this.y - 15, this.x - 55, this.y + 22.5, this.x - 55, this.y + 22.5);
-    ctx.bezierCurveTo(this.x - 55, this.y + 40, this.x - 35, this.y + 62, this.x, this.y + 80);
-    ctx.bezierCurveTo(this.x + 35, this.y + 62, this.x + 55, this.y + 40, this.x + 55, this.y + 22.5);
-    ctx.bezierCurveTo(this.x + 55, this.y + 22.5, this.x + 55, this.y - 15, this.x + 25, this.y - 15);
-    ctx.bezierCurveTo(this.x + 10, this.y - 15, this.x, this.y - 3, this.x, this.y);
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x, y - 3, x - 5, y - 15, x - 25, y - 15);
+    ctx.bezierCurveTo(x - 55, y - 15, x - 55, y + 22.5, x - 55, y + 22.5);
+    ctx.bezierCurveTo(x - 55, y + 40, x - 35, y + 62, x, y + 80);
+    ctx.bezierCurveTo(x + 35, y + 62, x + 55, y + 40, x + 55, y + 22.5);
+    ctx.bezierCurveTo(x + 55, y + 22.5, x + 55, y - 15, x + 25, y - 15);
+    ctx.bezierCurveTo(x + 10, y - 15, x, y - 3, x, y);
     ctx.fillStyle = "#F52C7D";
     ctx.fill();
   }
@@ -90,27 +107,22 @@ function Skull(clickEvent) {
     this.makeNose();
     this.makeTeeth();
   }
+
   this.makeCranium = function(start) {
     var ctx = this.drawing.ctx;
     ctx.beginPath();
     ctx.arc(this.x, this.y, start/2, (Math.PI/180) * 48, (Math.PI/180) * 132, true);
-    //ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = this.color;
     ctx.stroke();
-    /*this.ctx.fillStyle = this.color;
-    this.ctx.fill();*/
   }
 
   this.makeJaw = function() {
     var ctx = this.drawing.ctx;
     ctx.beginPath();
     ctx.arc(this.x, this.y+30, 23, (Math.PI/180)*195, (Math.PI/180)*345, true);
-    //ctx.closePath();
     ctx.lineWidth = 2;
     ctx.strokeStyle = this.drawing.color;
-   // ctx.fillStyle = this.drawing.color;
-   // ctx.fill();
     ctx.stroke();
   }
 
@@ -125,9 +137,6 @@ function Skull(clickEvent) {
     ctx.arc(this.x - place, this.y + 9.5, 10, 0, this.drawing.radians, true);
     ctx.closePath();
     ctx.stroke();
-
-    //ctx.fillStyle = "white";
-    //ctx.fill();
   }
 
   this.makeNose = function() {
@@ -168,18 +177,7 @@ function Skull(clickEvent) {
 
 }
 
-function ArcBusiness(clickEvent) {
-  this.drawing = new DrawBasics(clickEvent);
-  /*
-  this.makeArc = function(start) {
-    this.drawing.ctx.beginPath();
-    this.drawing.ctx.arc(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, start/2, 0, this.radians, true);
-    this.drawing.ctx.closePath();
-    this.drawing.ctx.lineWidth = 5;
-    this.drawing.ctx.strokeStyle = this.drawing.color;
-    this.drawing.ctx.stroke();
-  }
-*/
+
 
 function ArcBusiness(clickEvent) {
   this.drawing = new DrawBasics(clickEvent);
@@ -208,19 +206,7 @@ function ArcBusiness(clickEvent) {
     }, (start*delay));
   }
 
-    arc.makeArc(20);
-    setTimeout(function() {
-     arc.makeArc(start); 
-    }, (start*delay));
-  }
-
-  this.makeArc = function(start) {
-    this.drawing.ctx.beginPath();
-    this.drawing.ctx.arc(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, start/2, 0, this.radians, true);
-    this.drawing.ctx.closePath();
-    this.drawing.ctx.lineWidth = 5;
-    this.drawing.ctx.strokeStyle = this.drawing.color;
-    this.drawing.ctx.stroke();
-  }
 }
+
+
      

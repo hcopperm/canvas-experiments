@@ -4,38 +4,49 @@
   </head>
   
   <body>
+
     <div>
-      <button id = "clear">Clear</button>
-    </div>
-    <div>
-      <button id = "circles">Skulls</button>
+      <button id = "skull">Skulls</button>
       <button id = "hearts">Hearts</button>
+      <button id = "skullImage">Skull Image</button>
+      <button id = "arc">Arcs</button>
+      <button id = "clear">Clear</button>
     </div>
     <canvas id="tutorial" width="1000" height="550"></canvas>
 
     <script>
-      var circles = true;
+      var stampType = "skull";
       var tutorial = document.getElementById("tutorial");
       tutorial.addEventListener("click", function(clickEvent) {
-        if (circles) {
+        if (stampType == "skull") {
           var skull = new Skull(clickEvent);
           skull.makeSkull();
-//          var arc = new ArcBusiness(clickEvent);
-//          arc.drawArcs();
-        } else {
+        } else if (stampType == "skullImage") {
+          var img = new ImageStamp(clickEvent);
+          img.draw();
+        } else if (stampType == "heart") {
           var heart = new Heart(clickEvent);
           heart.drawHeart();
+        } else if (stampType = "arcs") {
+          var arc = new ArcBusiness(clickEvent);
+          arc.drawArcs();
         }
+        
       });
       var clearButton = document.getElementById("clear");
       clearButton.addEventListener("click", function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
       });
-      var circleButton = document.getElementById("circles");
-      circleButton.addEventListener("click", function() {circles = true});
+      var skullButton = document.getElementById("skull");
+      skullButton.addEventListener("click", function() {stampType = "skull"});
+      var skullImageButton = document.getElementById("skullImage");
+      skullImageButton.addEventListener("click", function() {stampType = "skullImage"});
       var heartButton = document.getElementById("hearts");
-      heartButton.addEventListener("click", function() {circles = false});
+      heartButton.addEventListener("click", function() {stampType = "heart"});
+      var arcButton = document.getElementById("arc");
+      arcButton.addEventListener("click", function() {stampType = "arc"});
       
+
 
     </script>
   </body>
