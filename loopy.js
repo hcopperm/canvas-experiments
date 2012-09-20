@@ -57,7 +57,7 @@ function ImageStamp(clickEvent) {
     img.onload = function(){
       ctx.drawImage(img,x,y);
     };
-    img.src = './skull.png';
+    img.src = './dino.png';
   }  
 }
 
@@ -113,7 +113,7 @@ function Skull(clickEvent) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, start/2, (Math.PI/180) * 48, (Math.PI/180) * 132, true);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = this.color;
+    ctx.strokeStyle = "black";
     ctx.stroke();
   }
 
