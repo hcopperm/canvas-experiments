@@ -24,7 +24,7 @@
         } else if (stampType == "skullImage") {
           var img = new ImageStamp(clickEvent);
           img.draw();
-        } else if (stampType == "heart") {
+        } else if (stampType == "hearts") {
           var heart = new Heart(clickEvent);
           heart.drawHeart();
         } else if (stampType = "arcs") {
@@ -37,15 +37,21 @@
       clearButton.addEventListener("click", function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
       });
+      var list = ["skull", "skullImage", "hearts", "arc"];
+      for (var x = 0; x < 4; x++) {
+        var button = document.getElementById(list[x]);
+        button.addEventListener("click", function() {stampType = list[x]});
+      }
+/*
       var skullButton = document.getElementById("skull");
-      skullButton.addEventListener("click", function() {stampType = "skull"});
+      skullButton.addEventListener("click", function() {stampType = "skull"; skullButton.style.backgroundColor = "pink";});
       var skullImageButton = document.getElementById("skullImage");
       skullImageButton.addEventListener("click", function() {stampType = "skullImage"});
       var heartButton = document.getElementById("hearts");
-      heartButton.addEventListener("click", function() {stampType = "heart"});
+      heartButton.addEventListener("click", function() {stampType = "hearts" });
       var arcButton = document.getElementById("arc");
       arcButton.addEventListener("click", function() {stampType = "arc"});
-      
+      */
 
 
     </script>
