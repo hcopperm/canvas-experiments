@@ -76,9 +76,7 @@ function DrawBasics(clickEvent) {
     this.g = parseInt(g * 256);
     this.b = parseInt(b * 256);
   }
-  console.log(this.mouseCoords.x + " " + this.mouseCoords.y);
   this.hsv_to_rgb((this.mouseCoords.x/1000), Math.random(), 0.95);
-  console.log(this.r + " " + this.g + " " + this.b);
   this.color = "rgb(" + this.r + ", " + this.g + ", " + this.b + ")";
 
   this.makeArc = function(start) {
@@ -100,7 +98,7 @@ function ImageStamp(clickEvent) {
     var x = this.drawing.mouseCoords.x;
     var y = this.drawing.mouseCoords.y;
     img.onload = function(){
-      ctx.drawImage(img,x,y);
+      ctx.drawImage(img,x-60,y-60);
     };
     img.src = './dino.png';
   }  

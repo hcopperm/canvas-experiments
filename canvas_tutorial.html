@@ -1,6 +1,11 @@
 <html>
   <head>
     <script src="loopy.js"></script>
+    <style>
+      .selected {
+        background-color: #D5DEED;
+      }
+    </style>
   </head>
   
   <body>
@@ -8,7 +13,7 @@
     <div>
       <button id = "skull">Skulls</button>
       <button id = "hearts">Hearts</button>
-      <button id = "skullImage">Dinosaur</button>
+      <button id = "dinosaur">Dinosaur</button>
       <button id = "arc">Arcs</button>
       <button id = "clear">Clear</button>
     </div>
@@ -21,13 +26,13 @@
         if (stampType == "skull") {
           var skull = new Skull(clickEvent);
           skull.makeSkull();
-        } else if (stampType == "skullImage") {
+        } else if (stampType == "dinosaur") {
           var img = new ImageStamp(clickEvent);
           img.draw();
         } else if (stampType == "hearts") {
           var heart = new Heart(clickEvent);
           heart.drawHeart();
-        } else if (stampType = "arcs") {
+        } else if (stampType == "arc") {
           var arc = new ArcBusiness(clickEvent);
           arc.drawArcs();
         }
@@ -37,22 +42,18 @@
       clearButton.addEventListener("click", function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
       });
-      var list = ["skull", "skullImage", "hearts", "arc"];
-      for (var x = 0; x < 4; x++) {
-        var button = document.getElementById(list[x]);
-        button.addEventListener("click", function() {stampType = list[x]});
+      var list = ["skull", "dinosaur", "hearts", "arc"];
+      var button = document.getElementById("skull");
+      button.classList.add("selected");
+      for (var x in list) {
+        var newButton = document.getElementById(list[x]);
+        newButton.addEventListener("click", function() {
+          button.classList.remove("selected");
+          button = this;
+          stampType = this.id;
+          this.classList.add("selected");
+        });
       }
-/*
-      var skullButton = document.getElementById("skull");
-      skullButton.addEventListener("click", function() {stampType = "skull"; skullButton.style.backgroundColor = "pink";});
-      var skullImageButton = document.getElementById("skullImage");
-      skullImageButton.addEventListener("click", function() {stampType = "skullImage"});
-      var heartButton = document.getElementById("hearts");
-      heartButton.addEventListener("click", function() {stampType = "hearts" });
-      var arcButton = document.getElementById("arc");
-      arcButton.addEventListener("click", function() {stampType = "arc"});
-      */
-
 
     </script>
   </body>
