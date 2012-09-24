@@ -30,7 +30,56 @@ function DrawBasics(clickEvent) {
   }
   this.relMouseCoords();
   
-  this.color = "rgb(" + this.stepColor(this.mouseCoords.y) + ", " + this.stepColor(this.mouseCoords.x) +", " + this.stepColor(Math.random() * 90) + ")";  
+
+
+
+  this.hsv_to_rgb = function(h, s, v) {
+    var h_i = parseInt(h*6);
+    var f = h*6 - h_i;
+    var p = v * (1 - s);
+    var q = v * (1 - f*s);
+    var t = v * (1 - (1 - f) * s);
+    var r;
+    var g;
+    var b;
+    if (h_i==0) {
+      r = v;
+      g = t; 
+      b = p;
+    }
+    if (h_i==1) {
+      r = q;
+      g = v;
+      b = p;
+    } 
+    if (h_i == 2) {
+      r = p;
+      g = v;
+      b = t;
+    }
+    if (h_i == 3) {
+      r = p;
+      g = q;
+      b = v;
+    }
+    if (h_i == 4) {
+      r = t;
+      g = p;
+      b = v;
+    }
+    if (h_i == 5) {
+      r = v;
+      g = p;
+      b = q;
+    }
+    this.r = parseInt(r * 256);
+    this.g = parseInt(g * 256);
+    this.b = parseInt(b * 256);
+  }
+  console.log(this.mouseCoords.x + " " + this.mouseCoords.y);
+  this.hsv_to_rgb((this.mouseCoords.x/1000), Math.random(), 0.95);
+  console.log(this.r + " " + this.g + " " + this.b);
+  this.color = "rgb(" + this.r + ", " + this.g + ", " + this.b + ")";
 
   this.makeArc = function(start) {
 
@@ -40,11 +89,7 @@ function DrawBasics(clickEvent) {
     this.ctx.lineWidth = 2;
     this.ctx.strokeStyle = this.color;
     this.ctx.stroke();
-    /*this.ctx.fillStyle = this.color;
-    this.ctx.fill();*/
   }
-
-
 }
 
 function ImageStamp(clickEvent) {
@@ -100,6 +145,7 @@ function Skull(clickEvent) {
   this.x = this.drawing.mouseCoords.x;
   this.y = this.drawing.mouseCoords.y;
   this.makeSkull = function(start) {
+    this.drawing.hsv_to_rgb(0.1, 0.2, 0.1);
     this.makeCranium(65);
     this.makeJaw();
     this.makeMouth();
