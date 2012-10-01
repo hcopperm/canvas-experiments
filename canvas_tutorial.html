@@ -3,7 +3,17 @@
     <script src="loopy.js"></script>
     <style>
       .selected {
-        background-color: #D5DEED;
+        border: 3px inset #AFFAFA;
+        background-color: #DAF7F7;
+      }
+      canvas {
+        display: block;
+      }
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
       }
     </style>
   </head>
@@ -11,18 +21,21 @@
   <body>
 
     <div>
-      <button id = "skull">Skulls</button>
-      <button id = "hearts">Hearts</button>
+      <button id = "skull">Skull</button>
+      <button id = "hearts">Heart</button>
       <button id = "dinosaur">Dinosaur</button>
       <button id = "arc">Arcs</button>
       <button id = "clear">Clear</button>
     </div>
-    <canvas id="tutorial" width="1000" height="550"></canvas>
-
+    <div id = "tutorial_div">
+      <canvas id="tutorial" ></canvas>
+    </div>
     <script>
       var stampType = "skull";
       var tutorial = document.getElementById("tutorial");
-      tutorial.addEventListener("click", function(clickEvent) {
+      var canvas = tutorial.getContext("2d"); 
+      var tutorial_div = document.getElementById("tutorial_div");
+      tutorial_div.addEventListener("click", function(clickEvent) {
         if (stampType == "skull") {
           var skull = new Skull(clickEvent);
           skull.makeSkull();
@@ -38,9 +51,23 @@
         }
         
       });
+      function resizeCanvas() {
+
+        var newCanvas = document.createElement("canvas");
+        newCanvas.width = window.innerWidth;
+        newCanvas.height = window.innerHeight-28;
+        var context = newCanvas.getContext("2d");
+        tutorial_div.replaceChild(newCanvas, tutorial); 
+        context.drawImage(tutorial, 0, 0);
+        newCanvas.id = "tutorial";
+        newCanvas.classList.add("butts");
+        tutorial = newCanvas;
+      } 
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas );
       var clearButton = document.getElementById("clear");
       clearButton.addEventListener("click", function(clickEvent) {
-        tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
+        canvas.clearRect(0, 0, 1000, 550);
       });
       var list = ["skull", "dinosaur", "hearts", "arc"];
       var button = document.getElementById("skull");
