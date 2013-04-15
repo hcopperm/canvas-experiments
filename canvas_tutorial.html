@@ -67,7 +67,7 @@
       window.addEventListener("resize", resizeCanvas );
       var clearButton = document.getElementById("clear");
       clearButton.addEventListener("click", function(clickEvent) {
-        tutorial.getContext("2d").clearRect(0, 0, 1000, 550);
+        tutorial.getContext("2d").clearRect(0, 0, tutorial.width, tutorial.height);
       });
       var list = ["skull", "dinosaur", "hearts", "arc"];
       var button = document.getElementById("skull");
