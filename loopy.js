@@ -231,8 +231,11 @@ function ArcBusiness(clickEvent) {
 
 
   this.drawArcs = function() {
-    for (var x = 2; x < 50; x++) {
+    //for (var x = 2; x < 80; x++) {
+    var x = 0;
+    while ((x*20)/2 < this.drawing.canvas.width) {
       this.delayArc(x*20, 1);
+      x += 1;
     }
   }
 
@@ -246,7 +249,7 @@ function ArcBusiness(clickEvent) {
     var arc = this;
     arc.drawing.makeArc(20);
     setTimeout(function() {
-     arc.drawing.makeArc(start); 
+      arc.drawing.makeArc(start); 
     }, (start*delay));
   }
 
