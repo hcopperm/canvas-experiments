@@ -110,7 +110,7 @@ function Heart(clickEvent) {
 
 
   this.drawing = new DrawBasics(clickEvent);
-  this.drawHeart = function() {
+  this.drawHeart = function(color) {
     var ctx = this.drawing.ctx;
     var x = this.drawing.mouseCoords.x;
     var y = this.drawing.mouseCoords.y;
@@ -122,7 +122,7 @@ function Heart(clickEvent) {
     ctx.bezierCurveTo(x + 35, y + 62, x + 55, y + 40, x + 55, y + 22.5);
     ctx.bezierCurveTo(x + 55, y + 22.5, x + 55, y - 15, x + 25, y - 15);
     ctx.bezierCurveTo(x + 10, y - 15, x, y - 3, x, y);
-    ctx.fillStyle = "#F52C7D";
+    ctx.fillStyle = color;
     ctx.fill();
   }
 }
@@ -134,15 +134,14 @@ function SquareBusiness(clickEvent) {
     this.drawing.ctx.fillStyle = this.drawing.color;
     this.drawing.ctx.fillRect(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, 20, 20);
   }
-
 }
 
 function Skull(clickEvent) {
   this.drawing = new DrawBasics(clickEvent);
-  this.drawing.color = "black";
   this.x = this.drawing.mouseCoords.x;
   this.y = this.drawing.mouseCoords.y;
-  this.makeSkull = function(start) {
+  this.makeSkull = function(color) {
+    this.drawing.color = color;
     this.drawing.hsv_to_rgb(0.1, 0.2, 0.1);
     this.makeCranium(65);
     this.makeJaw();
@@ -157,7 +156,7 @@ function Skull(clickEvent) {
     ctx.beginPath();
     ctx.arc(this.x, this.y, start/2, (Math.PI/180) * 48, (Math.PI/180) * 132, true);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = "black";
+    ctx.strokeStyle = this.drawing.color;
     ctx.stroke();
   }
 
