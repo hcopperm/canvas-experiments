@@ -1,6 +1,8 @@
 <html>
   <head>
     <script src="loopy.js"></script>
+    <script type="text/javascript" src="jscolor.js"></script>
+    <script type="text/javascript" src="jquery.js"></script>
     <style>
       .selected {
         border: 3px inset #AFFAFA;
@@ -17,7 +19,7 @@
       }
     </style>
   </head>
-  
+
   <body>
 
     <div>
@@ -26,6 +28,7 @@
       <button id = "dinosaur">Dinosaur</button>
       <button id = "arc">Arcs</button>
       <button id = "clear">Clear</button>
+      <input type="color">
     </div>
     <div id = "tutorial_div">
       <canvas id="tutorial" ></canvas>
@@ -33,52 +36,57 @@
     <script>
       var stampType = "skull";
       var tutorial = document.getElementById("tutorial");
-      var canvas = tutorial.getContext("2d"); 
-      var tutorial_div = document.getElementById("tutorial_div");
-      tutorial_div.addEventListener("click", function(clickEvent) {
-        if (stampType == "skull") {
-          var skull = new Skull(clickEvent);
-          skull.makeSkull();
-        } else if (stampType == "dinosaur") {
-          var img = new ImageStamp(clickEvent);
-          img.draw();
-        } else if (stampType == "hearts") {
-          var heart = new Heart(clickEvent);
-          heart.drawHeart();
-        } else if (stampType == "arc") {
-          var arc = new ArcBusiness(clickEvent);
-          arc.drawArcs();
+      var canvas = tutorial.getContext("2d");
+      var tutorial_div = $("#tutorial_div");
+      tutorial_div.click( function(clickEvent) {
+        switch (stampType) {
+          case "skull":
+            var skull = new Skull(clickEvent);
+            skull.makeSkull();
+            break;
+          case "dinosaur":
+            var img = new ImageStamp(clickEvent);
+            img.draw();
+            break;
+          case "hearts":
+            var heart = new Heart(clickEvent);
+            heart.drawHeart();
+            break;
+          case "arc":
+            var arc = new ArcBusiness(clickEvent);
+            arc.drawArcs();
+            break;
         }
-        
-      });
-      function resizeCanvas() {
 
+      });
+
+      function resizeCanvas() {
         var newCanvas = document.createElement("canvas");
         newCanvas.width = window.innerWidth;
         newCanvas.height = window.innerHeight-28;
         var context = newCanvas.getContext("2d");
-        tutorial_div.replaceChild(newCanvas, tutorial); 
+        tutorial_div.html(newCanvas, tutorial);
         context.drawImage(tutorial, 0, 0);
         newCanvas.id = "tutorial";
-        newCanvas.classList.add("butts");
         tutorial = newCanvas;
-      } 
+      }
       resizeCanvas();
-      window.addEventListener("resize", resizeCanvas );
-      var clearButton = document.getElementById("clear");
-      clearButton.addEventListener("click", function(clickEvent) {
+
+      $(window).resize(resizeCanvas );
+      var clearButton = $("#clear");
+      clearButton.click(function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, tutorial.width, tutorial.height);
       });
       var list = ["skull", "dinosaur", "hearts", "arc"];
-      var button = document.getElementById("skull");
-      button.classList.add("selected");
+      var button = $("#skull");
+      button.addClass("selected");
       for (var x in list) {
-        var newButton = document.getElementById(list[x]);
-        newButton.addEventListener("click", function() {
-          button.classList.remove("selected");
-          button = this;
-          stampType = this.id;
-          this.classList.add("selected");
+        var newButton = $("#" + list[x]);
+        newButton.click(function() {
+          button.removeClass("selected");
+          button = $(this);
+          stampType = button.attr("id");
+          button.addClass("selected");
         });
       }
 

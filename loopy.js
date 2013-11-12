@@ -1,14 +1,14 @@
 function DrawBasics(clickEvent) {
 
   this.canvas = document.getElementById("tutorial");
-  this.ctx = this.canvas.getContext('2d'); 
+  this.ctx = this.canvas.getContext('2d');
   this.degrees = 360;
   this.radians = (Math.PI/180)*this.degrees;
 
   this.stepColor = function(startPoint) {
     return Math.floor(255-42.5*(startPoint % 3));
   }
-  
+
 
   this.relMouseCoords = function(){
       var totalOffsetX = 0;
@@ -16,20 +16,20 @@ function DrawBasics(clickEvent) {
       var canvasX = 0;
       var canvasY = 0;
       var currentElement = this.canvas;
-  
+
       do{
           totalOffsetX += currentElement.offsetLeft;
           totalOffsetY += currentElement.offsetTop;
       }
       while(currentElement = currentElement.offsetParent)
-  
+
       canvasX = clickEvent.pageX - totalOffsetX;
       canvasY = clickEvent.pageY - totalOffsetY;
-  
+
       this.mouseCoords =  {x:canvasX, y:canvasY}
   }
   this.relMouseCoords();
-  
+
 
 
 
@@ -44,14 +44,14 @@ function DrawBasics(clickEvent) {
     var b;
     if (h_i==0) {
       r = v;
-      g = t; 
+      g = t;
       b = p;
     }
     if (h_i==1) {
       r = q;
       g = v;
       b = p;
-    } 
+    }
     if (h_i == 2) {
       r = p;
       g = v;
@@ -101,7 +101,7 @@ function ImageStamp(clickEvent) {
       ctx.drawImage(img,x-60,y-60);
     };
     img.src = './dino.png';
-  }  
+  }
 }
 
 
@@ -132,7 +132,7 @@ function SquareBusiness(clickEvent) {
   this.drawing = new DrawBasics(clickEvent);
   this.drawSquare = function() {
     this.drawing.ctx.fillStyle = this.drawing.color;
-    this.drawing.ctx.fillRect(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, 20, 20);    
+    this.drawing.ctx.fillRect(this.drawing.mouseCoords.x, this.drawing.mouseCoords.y, 20, 20);
   }
 
 }
@@ -191,7 +191,7 @@ function Skull(clickEvent) {
     ctx.lineTo(this.x + 4, this.y + 29);
     ctx.closePath();
     ctx.stroke();
-  
+
   }
 
   this.makeMouth = function() {
@@ -212,7 +212,6 @@ function Skull(clickEvent) {
       ctx.beginPath();
       ctx.moveTo(this.x + z, this.y+36);
       ctx.lineTo(this.x + z, this.y+43);
-     // ctx.strokeStyle = "white";
       ctx.stroke();
       z += 5;
     }
@@ -249,11 +248,11 @@ function ArcBusiness(clickEvent) {
     var arc = this;
     arc.drawing.makeArc(20);
     setTimeout(function() {
-      arc.drawing.makeArc(start); 
+      arc.drawing.makeArc(start);
     }, (start*delay));
   }
 
 }
 
 
-     
+
