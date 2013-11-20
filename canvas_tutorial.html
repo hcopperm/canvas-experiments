@@ -24,11 +24,13 @@
   <body>
 
     <div>
-      <button id = "skull">Skull</button>
-      <button id = "hearts">Heart</button>
-      <button id = "dinosaur">Dinosaur</button>
-      <button id = "arc">Arcs</button>
-      <button id = "clear">Clear</button>
+      <button id="skull">Skull</button>
+      <button id="hearts">Heart</button>
+      <button id="dinosaur">Dinosaur</button>
+      <button id="arc">Arcs</button>
+      <button id="line">Line</button>
+      <input type="text" id="line_width">
+      <button id="clear">Clear</button>
       <input type="color" id="color">
     </div>
     <div id = "tutorial_div">
@@ -61,6 +63,11 @@
         }
 
       });
+      tutorial_div.mousedown(function(clickEvent) {
+        if (stampType == "line") {
+          var drawBasics = new Line(clickEvent);
+        }
+      });
 
       function resizeCanvas() {
         var newCanvas = document.createElement("canvas");
@@ -74,12 +81,12 @@
       }
       resizeCanvas();
 
-      $(window).resize(resizeCanvas );
+      $(window).resize(resizeCanvas);
       var clearButton = $("#clear");
       clearButton.click(function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, tutorial.width, tutorial.height);
       });
-      var list = ["skull", "dinosaur", "hearts", "arc"];
+      var list = ["skull", "dinosaur", "hearts", "arc", "line"];
       var button = $("#skull");
       button.addClass("selected");
       for (var x = 0; x < list.length; x++) {

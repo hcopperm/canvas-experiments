@@ -1,6 +1,25 @@
+relMouseCoords = function(clickEvent, el){
+    var totalOffsetX = 0;
+    var totalOffsetY = 0;
+    var canvasX = 0;
+    var canvasY = 0;
+    var currentElement = el.canvas;
+
+    do{
+        totalOffsetX += currentElement.offsetLeft;
+        totalOffsetY += currentElement.offsetTop;
+    }
+    while(currentElement = currentElement.offsetParent)
+
+    canvasX = clickEvent.pageX - totalOffsetX;
+    canvasY = clickEvent.pageY - totalOffsetY;
+
+    return {x:canvasX, y:canvasY}
+}
 function DrawBasics(clickEvent) {
 
   this.canvas = document.getElementById("tutorial");
+  this.tutorial_div = $("#tutorial_div");
   this.ctx = this.canvas.getContext('2d');
   this.degrees = 360;
   this.radians = (Math.PI/180)*this.degrees;
@@ -9,26 +28,7 @@ function DrawBasics(clickEvent) {
     return Math.floor(255-42.5*(startPoint % 3));
   }
 
-
-  this.relMouseCoords = function(){
-      var totalOffsetX = 0;
-      var totalOffsetY = 0;
-      var canvasX = 0;
-      var canvasY = 0;
-      var currentElement = this.canvas;
-
-      do{
-          totalOffsetX += currentElement.offsetLeft;
-          totalOffsetY += currentElement.offsetTop;
-      }
-      while(currentElement = currentElement.offsetParent)
-
-      canvasX = clickEvent.pageX - totalOffsetX;
-      canvasY = clickEvent.pageY - totalOffsetY;
-
-      this.mouseCoords =  {x:canvasX, y:canvasY}
-  }
-  this.relMouseCoords();
+  this.mouseCoords = relMouseCoords(clickEvent, this);
 
 
 
@@ -102,6 +102,20 @@ function ImageStamp(clickEvent) {
     };
     img.src = './dino.png';
   }
+}
+
+function Line(clickEvent) {
+  var drawBasics = new DrawBasics(clickEvent);
+  var line = this;
+  line.downCoords = relMouseCoords(clickEvent, drawBasics);
+  drawBasics.tutorial_div.mouseup(function(upEvent) {
+    drawBasics.tutorial_div.unbind("mouseup");
+    line.upCoords = relMouseCoords(upEvent, drawBasics);
+    drawBasics.ctx.beginPath();
+    drawBasics.ctx.moveTo(line.downCoords.x, line.downCoords.y);
+    drawBasics.ctx.lineTo(line.upCoords.x, line.upCoords.y);
+    drawBasics.ctx.stroke();
+  });
 }
 
 
