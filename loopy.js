@@ -19,6 +19,7 @@ relMouseCoords = function(clickEvent, el){
 function DrawBasics(clickEvent) {
 
   this.canvas = document.getElementById("tutorial");
+  console.log("hiii");
   this.tutorial_div = $("#tutorial_div");
   this.ctx = this.canvas.getContext('2d');
   this.degrees = 360;
