@@ -65,7 +65,9 @@
       });
       tutorial_div.mousedown(function(clickEvent) {
         if (stampType == "line") {
-          var drawBasics = new Line(clickEvent);
+          var color = $("#color").val();
+          var line = new Line(clickEvent);
+          line.drawLine(color);
         }
       });
 

@@ -105,18 +105,30 @@ function ImageStamp(clickEvent) {
   }
 }
 
+function randomizeCoords(mouseCoords) {
+  var newX = (mouseCoords.x - (Math.random() * 100));
+  var newY = (mouseCoords.y + (Math.random() * 100));
+  return {x:newX, y:newY};
+
+}
+
 function Line(clickEvent) {
   var drawBasics = new DrawBasics(clickEvent);
-  var line = this;
-  line.downCoords = relMouseCoords(clickEvent, drawBasics);
-  drawBasics.tutorial_div.mouseup(function(upEvent) {
-    drawBasics.tutorial_div.unbind("mouseup");
-    line.upCoords = relMouseCoords(upEvent, drawBasics);
-    drawBasics.ctx.beginPath();
-    drawBasics.ctx.moveTo(line.downCoords.x, line.downCoords.y);
-    drawBasics.ctx.lineTo(line.upCoords.x, line.upCoords.y);
-    drawBasics.ctx.stroke();
-  });
+  this.drawLine = function(color) {
+    var line = this;
+    line.downCoords = relMouseCoords(clickEvent, drawBasics);
+    line.downCoords = randomizeCoords(line.downCoords);
+    drawBasics.tutorial_div.mouseup(function(upEvent) {
+      drawBasics.tutorial_div.unbind("mouseup");
+      line.upCoords = relMouseCoords(upEvent, drawBasics);
+      line.upCoords = randomizeCoords(line.upCoords);
+      drawBasics.ctx.beginPath();
+      drawBasics.ctx.moveTo(line.downCoords.x, line.downCoords.y);
+      drawBasics.ctx.lineTo(line.upCoords.x, line.upCoords.y);
+      drawBasics.ctx.strokeStyle = color;
+      drawBasics.ctx.stroke();
+    });
+  }
 }
 
 
