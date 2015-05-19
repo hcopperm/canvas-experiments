@@ -8,44 +8,16 @@
   </head>
 
   <body>
-
-    <div class="button-bar">
-      <button id="skull">Skull</button>
-      <button id="hearts">Heart</button>
-      <button id="dinosaur">Dinosaur</button>
-      <button id="arc">Arcs</button>
-      <button id="clear">Clear</button>
-      <input type="color" id="color">
-    </div>
     <div id = "tutorial_div">
       <canvas id="tutorial" ></canvas>
     </div>
     <script>
-      var stampType = "skull";
       var tutorial = document.getElementById("tutorial");
       var canvas = tutorial.getContext("2d");
       var tutorial_div = $("#tutorial_div");
       tutorial_div.click( function(clickEvent) {
-        var color = $("#color").val();
-        switch (stampType) {
-          case "skull":
-            var skull = new Skull(clickEvent);
-            skull.makeSkull(color);
-            break;
-          case "dinosaur":
-            var img = new ImageStamp(clickEvent);
-            img.draw();
-            break;
-          case "hearts":
-            var heart = new Heart(clickEvent);
-            heart.drawHeart(color);
-            break;
-          case "arc":
-            var arc = new ArcBusiness(clickEvent);
-            arc.drawArcs();
-            break;
-        }
-
+        var arc = new ArcBusiness(clickEvent);
+        arc.drawArcs();
       });
       function resizeCanvas() {
         var newCanvas = document.createElement("canvas");
@@ -64,18 +36,6 @@
       clearButton.click(function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, tutorial.width, tutorial.height);
       });
-      var list = ["skull", "dinosaur", "hearts", "arc", "line"];
-      var button = $("#skull");
-      button.addClass("selected");
-      for (var x = 0; x < list.length; x++) {
-        var newButton = $("#" + list[x]);
-        newButton.click(function() {
-          button.removeClass("selected");
-          button = $(this);
-          stampType = button.attr("id");
-          button.addClass("selected");
-        });
-      }
     </script>
   </body>
 </html>

@@ -1,32 +1,12 @@
 
 canvas {
   display: block;
+  padding: 0;
+  margin: 0;
 }
 html, body {
   height: 100%;
   width: 100%;
-}
-
-button {
-  border: 1px solid #4A38F5;
-  font-size: 16px;
-  border-radius: 2px;
-  margin-right: 5px;
-  padding: 5px 10px;
-  background-color: #4A38F5;
-  color: white;
-}
-
-button.selected {
-  background-color: white;
-  color: #4A38F5;
-}
-
-#clear {
-  background-color: #CBC7F2;
-  color: #4A38F5;
-}
-
-.button-bar {
-  margin: 10px 5px;
+  padding: 0;
+  margin: 0;
 }
