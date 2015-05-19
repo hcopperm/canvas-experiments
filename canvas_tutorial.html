@@ -4,32 +4,16 @@
     <script src="loopy.js"></script>
     <script type="text/javascript" src="jscolor.js"></script>
     <script type="text/javascript" src="jquery.js"></script>
-    <style>
-      .selected {
-        border: 3px inset #AFFAFA;
-        background-color: #DAF7F7;
-      }
-      canvas {
-        display: block;
-      }
-      html, body {
-        height: 100%;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
+    <link rel="stylesheet" href="canvas.css"></link>
   </head>
 
   <body>
 
-    <div>
+    <div class="button-bar">
       <button id="skull">Skull</button>
       <button id="hearts">Heart</button>
       <button id="dinosaur">Dinosaur</button>
       <button id="arc">Arcs</button>
-      <button id="line">Line</button>
-      <input type="text" id="line_width">
       <button id="clear">Clear</button>
       <input type="color" id="color">
     </div>
@@ -63,14 +47,6 @@
         }
 
       });
-      tutorial_div.mousedown(function(clickEvent) {
-        if (stampType == "line") {
-          var color = $("#color").val();
-          var line = new Line(clickEvent);
-          line.drawLine(color);
-        }
-      });
-
       function resizeCanvas() {
         var newCanvas = document.createElement("canvas");
         newCanvas.width = window.innerWidth;
