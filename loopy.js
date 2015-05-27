@@ -1,3 +1,6 @@
+// mouse coordinates
+// accounting for the size of the browser
+// as well as the size of the window
 relMouseCoords = function(clickEvent, el){
     var totalOffsetX = 0;
     var totalOffsetY = 0;
@@ -17,6 +20,9 @@ relMouseCoords = function(clickEvent, el){
     return {x:canvasX, y:canvasY}
 };
 
+// basic object
+// includes the canvas and the ctx of that canvas
+// so we don't have to re-instantiate it for every click (duh)
 function DrawBasics(clickEvent) {
 
   this.canvas = document.getElementById("tutorial");
@@ -75,9 +81,12 @@ function DrawBasics(clickEvent) {
     this.b = parseInt(b * 256);
   }
 
+  // set the color semi-randomly
+  // it takes the x coords of the click event as the hue value
   this.hsv_to_rgb((this.mouseCoords.x/1000), Math.random(), 0.95);
   this.color = "rgb(" + this.r + ", " + this.g + ", " + this.b + ")";
 
+  // drawing a circle
   this.makeArc = function(start, offsets) {
     this.ctx.beginPath();
     this.ctx.arc(this.mouseCoords.x, this.mouseCoords.y, start/2, 0, this.radians, true);
@@ -95,6 +104,9 @@ function DrawBasics(clickEvent) {
   }
 };
 
+// the circle object
+// wait i just realized i am instantiating DrawBasics on every click
+// ut ohs, changing
 function ArcBusiness(clickEvent) {
   this.drawing = new DrawBasics(clickEvent);
   this.degrees = 360;

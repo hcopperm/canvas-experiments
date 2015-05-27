@@ -28,6 +28,9 @@
         var arc = new ArcBusiness(clickEvent);
         arc.drawArcs(offsets);
       });
+      // when the page is resized, we have to recreate
+      // a whole new canvas element
+      // and copy the old canvas contents onto it
       function resizeCanvas() {
         var newCanvas = document.createElement("canvas");
         newCanvas.width = window.innerWidth;
@@ -39,8 +42,8 @@
         tutorial = newCanvas;
       }
       resizeCanvas();
-
       $(window).resize(resizeCanvas);
+      // clear the canvas element
       var clearButton = $("#clear");
       clearButton.click(function(clickEvent) {
         tutorial.getContext("2d").clearRect(0, 0, tutorial.width, tutorial.height);
