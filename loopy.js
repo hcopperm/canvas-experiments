@@ -6,7 +6,7 @@ relMouseCoords = function(clickEvent, el){
     var totalOffsetY = 0;
     var canvasX = 0;
     var canvasY = 0;
-    var currentElement = el.canvas;
+    var currentElement = canvas;
 
     do{
         totalOffsetX += currentElement.offsetLeft;
@@ -20,14 +20,19 @@ relMouseCoords = function(clickEvent, el){
     return {x:canvasX, y:canvasY}
 };
 
+// global objects
+var canvas = undefined;
+var ctx = undefined;
+$(function() {
+  // Only initialize once the document is ready. (Thanks, jQuery!)
+  canvas = document.getElementById("tutorial");
+  ctx = canvas.getContext('2d');
+});
+
 // basic object
-// includes the canvas and the ctx of that canvas
-// so we don't have to re-instantiate it for every click (duh)
 function DrawBasics(clickEvent) {
 
-  this.canvas = document.getElementById("tutorial");
   this.tutorial_div = $("#tutorial_div");
-  this.ctx = this.canvas.getContext('2d');
   this.degrees = 360;
   this.radians = (Math.PI/180)*this.degrees;
 
@@ -88,12 +93,12 @@ function DrawBasics(clickEvent) {
 
   // drawing a circle
   this.makeArc = function(start, offsets) {
-    this.ctx.beginPath();
-    this.ctx.arc(this.mouseCoords.x, this.mouseCoords.y, start/2, 0, this.radians, true);
-    this.ctx.closePath();
-    this.ctx.lineWidth = 2;
-    this.ctx.strokeStyle = this.color;
-    this.ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(this.mouseCoords.x, this.mouseCoords.y, start/2, 0, this.radians, true);
+    ctx.closePath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = this.color;
+    ctx.stroke();
     if (parseInt(offsets.x)) {
       this.mouseCoords.x += parseInt(offsets.x);
     }
@@ -113,7 +118,7 @@ function ArcBusiness(clickEvent) {
 
   this.drawArcs = function(offsets) {
     var x = 0;
-    while ((x*20)/2 < this.drawing.canvas.width) {
+    while ((x*20)/2 < canvas.width) {
       this.delayArc(x*20, 1, offsets);
       x += 1;
     }
