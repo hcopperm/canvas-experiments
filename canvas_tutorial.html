@@ -8,11 +8,9 @@
   </head>
 
   <body>
-    <div id="button_bar">
-      <label for="x_offset">X:</label>
-      <input type="text" id="x_offset">
-      <label for="y_offset">Y:</label>
-      <input type="text" id="y_offset">
+    <div class="button_bar">
+      <input type="text" id="x_offset" pattern=[0-9]+ placeholder="X Offset">
+      <input type="text" id="y_offset" pattern=[0-9]+ placeholder="Y Offset">
       <button id=clear>Clear</button>
     </div>
 

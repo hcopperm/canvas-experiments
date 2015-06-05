@@ -1,4 +1,3 @@
-
 canvas {
   display: block;
 }
@@ -7,4 +6,25 @@ html, body {
   width: 100%;
   padding: 0;
   margin: 0;
+}
+
+.button_bar {
+  margin: 5px;
+}
+
+input, button {
+  border-radius: 4px;
+  background: -moz-linear-gradient(left,#E9ECF2,#C8D1E6);
+  background: -webkit-linear-gradient(left,#E9ECF2,#C8D1E6);
+  background: -ms-linear-gradient(left,#E9ECF2,#C8D1E6);
+  background: -o-linear-gradient(left,#E9ECF2,#C8D1E6);
+  background: linear-gradient(to right,#E9ECF2,#C8D1E6);
+  padding: 5px;
+  font-size: 18px;
+  font-family: 'Baskerville';
+  border: 2px solid #A8BAE0;
+}
+
+input:invalid {
+  border: 2px solid red;
 }
