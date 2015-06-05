@@ -12,19 +12,28 @@ html, body {
   margin: 5px;
 }
 
+input {
+  width: 65px;
+}
+
 input, button {
-  border-radius: 4px;
-  background: -moz-linear-gradient(left,#E9ECF2,#C8D1E6);
-  background: -webkit-linear-gradient(left,#E9ECF2,#C8D1E6);
-  background: -ms-linear-gradient(left,#E9ECF2,#C8D1E6);
-  background: -o-linear-gradient(left,#E9ECF2,#C8D1E6);
-  background: linear-gradient(to right,#E9ECF2,#C8D1E6);
-  padding: 5px;
+  margin-right: 10px;
+  padding: 10px;
   font-size: 18px;
   font-family: 'Baskerville';
-  border: 2px solid #A8BAE0;
+  border: 5px solid #A8BAE0;
+}
+
+button {
+  border-radius: 5px;
+  background: none;
+}
+
+button:hover {
+  background-color: #A8BAE0;
+  color: white;
 }
 
 input:invalid {
-  border: 2px solid red;
+  border: 5px solid red;
 }
