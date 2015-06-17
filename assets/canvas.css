@@ -27,6 +27,7 @@ input, button {
 button {
   border-radius: 5px;
   background: none;
+  cursor: pointer;
 }
 
 button:hover {
