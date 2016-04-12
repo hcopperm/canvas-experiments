@@ -1,5 +1,7 @@
 canvas {
+  position: relative;
   display: block;
+  z-index: 4;
 }
 html, body {
   height: 100%;
@@ -9,6 +11,8 @@ html, body {
 }
 
 .button_bar {
+  z-index: 10;
+  position: absolute;
   margin: 5px;
 }
 
@@ -26,7 +30,7 @@ input, button {
 
 button {
   border-radius: 5px;
-  background: none;
+  background-color: white;
   cursor: pointer;
 }
 
